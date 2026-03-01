@@ -1,0 +1,7 @@
+"ResourceMailboxIdentity","DelegateUserPrincipalNames","AutomateProcessing","ForwardRequestsToDelegates","AllBookInPolicy","AllRequestInPolicy","AllRequestOutOfPolicy"
+"confroom.chi101@los.onl","ava.nguyen@los.onl;charlotte.sanders@los.onl","AutoAccept","TRUE","FALSE","TRUE","FALSE"
+"confroom.chi202@los.onl","isabella.ross@los.onl;ava.nguyen@los.onl","AutoAccept","TRUE","FALSE","TRUE","FALSE"
+"confroom.dal301@los.onl","isabella.ross@los.onl;noah.patel@los.onl","AutoAccept","TRUE","FALSE","TRUE","FALSE"
+"equipment.proj01@los.onl","benjamin.morris@los.onl;henry.flores@los.onl","AutoAccept","TRUE","TRUE","FALSE","FALSE"
+"equipment.video01@los.onl","benjamin.morris@los.onl;jackson.hall@los.onl","AutoAccept","TRUE","TRUE","FALSE","FALSE"
+"equipment.surface01@los.onl","benjamin.morris@los.onl;isabella.ross@los.onl","AutoAccept","TRUE","FALSE","TRUE","FALSE"
