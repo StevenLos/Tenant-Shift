@@ -1,0 +1,6 @@
+SiteUrl,Title,Template,PrimaryOwnerUPN,SecondaryOwnersUPNs,Language,TimeZoneId,StorageQuotaMB
+https://los.sharepoint.com/sites/Operations,Operations Site,STS#3,ava.nguyen@los.onl,mason.carter@los.onl;isabella.ross@los.onl,1033,10,5120
+https://los.sharepoint.com/sites/HR,Human Resources Site,STS#3,mia.rodriguez@los.onl,emma.foster@los.onl;charlotte.sanders@los.onl,1033,10,5120
+https://los.sharepoint.com/sites/Finance,Finance Site,STS#3,noah.patel@los.onl,harper.collins@los.onl;daniel.brooks@los.onl,1033,10,5120
+https://los.sharepoint.com/sites/IT,IT Site,STS#3,ethan.clark@los.onl,benjamin.morris@los.onl;logan.reed@los.onl,1033,10,10240
+https://los.sharepoint.com/sites/Projects,Projects Site,STS#3,isabella.ross@los.onl,ava.nguyen@los.onl;noah.patel@los.onl,1033,10,10240

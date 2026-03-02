@@ -1,0 +1,6 @@
+"Name","Alias","DisplayName","UserPrincipalName","PrimarySmtpAddress","HiddenFromAddressListsEnabled","GrantSendOnBehalfTo","MessageCopyForSentAsEnabled","MessageCopyForSendOnBehalfEnabled","ForwardingSmtpAddress","DeliverToMailboxAndForward","AuditEnabled","LitigationHoldEnabled"
+"Q365 Shared Operations","q365sharedops","Shared Operations Mailbox","shared.operations@los.onl","shared.operations@los.onl","FALSE","ava.nguyen@los.onl;olivia.bennett@los.onl","TRUE","TRUE","","FALSE","TRUE","FALSE"
+"Q365 Shared HR","q365sharedhr","Shared HR Mailbox","shared.hr@los.onl","shared.hr@los.onl","FALSE","mia.rodriguez@los.onl","TRUE","TRUE","","FALSE","TRUE","TRUE"
+"Q365 Shared Finance","q365sharedfinance","Shared Finance Mailbox","shared.finance@los.onl","shared.finance@los.onl","FALSE","noah.patel@los.onl","TRUE","TRUE","","FALSE","TRUE","TRUE"
+"Q365 Shared IT","q365sharedit","Shared IT Mailbox","shared.it@los.onl","shared.it@los.onl","FALSE","ethan.clark@los.onl;benjamin.morris@los.onl","TRUE","TRUE","it-ticket-archive@los.onl","TRUE","TRUE","FALSE"
+"Q365 Shared Projects","q365sharedprojects","Shared Projects Mailbox","shared.projects@los.onl","shared.projects@los.onl","FALSE","isabella.ross@los.onl;ava.nguyen@los.onl","TRUE","TRUE","","FALSE","TRUE","FALSE"

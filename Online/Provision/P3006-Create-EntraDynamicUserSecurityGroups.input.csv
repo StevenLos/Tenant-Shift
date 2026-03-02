@@ -1,0 +1,5 @@
+"GroupDisplayName","MailNickname","Description","MembershipRule","MembershipRuleProcessingState"
+"Q365-DSG-US-Users","q365dsgususers","Dynamic users group for US usage location","(user.usageLocation -eq ""US"")","On"
+"Q365-DSG-Sales","q365dsgsales","Dynamic users group for Sales department","(user.department -eq ""Sales"")","On"
+"Q365-DSG-Operations","q365dsgoperations","Dynamic users group for Operations department","(user.department -eq ""Operations"")","On"
+"Q365-DSG-Support-Paused","q365dsgsupportpaused","Dynamic users group for Support department (paused for review)","(user.department -eq ""Support"")","Paused"

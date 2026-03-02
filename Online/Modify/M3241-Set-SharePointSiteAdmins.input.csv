@@ -1,0 +1,4 @@
+SiteUrl,AddSiteAdmins,RemoveSiteAdmins,EnsurePrimaryOwnerIsAdmin
+https://los.sharepoint.com/sites/Operations,sophia.turner@los.onl,liam.kim@los.onl,TRUE
+https://los.sharepoint.com/sites/HR,daniel.brooks@los.onl,charlotte.sanders@los.onl,TRUE
+https://los.sharepoint.com/sites/Finance,olivia.bennett@los.onl,harper.collins@los.onl,TRUE
