@@ -1,4 +1,4 @@
-# EntraID_EXO_Basic
+# CarveoutToNewco
 
 CSV-driven PowerShell automation for Microsoft 365 and hybrid administration, organized first by environment and then by lifecycle operation.
 
