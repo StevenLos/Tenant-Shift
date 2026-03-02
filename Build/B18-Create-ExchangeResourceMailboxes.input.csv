@@ -1,7 +1,0 @@
-"ResourceType","Name","Alias","DisplayName","UserPrincipalName","PrimarySmtpAddress","HiddenFromAddressListsEnabled","ResourceCapacity","Office","Phone"
-"Room","Conf Room Chicago 101","confroom.chi101","Conference Room Chicago 101","confroom.chi101@los.onl","confroom.chi101@los.onl","FALSE","12","Chicago HQ","+1 555 123 4001"
-"Room","Conf Room Chicago 202","confroom.chi202","Conference Room Chicago 202","confroom.chi202@los.onl","confroom.chi202@los.onl","FALSE","8","Chicago HQ","+1 555 123 4002"
-"Room","Conf Room Dallas 301","confroom.dal301","Conference Room Dallas 301","confroom.dal301@los.onl","confroom.dal301@los.onl","FALSE","10","Dallas Branch","+1 555 123 4003"
-"Equipment","Projector Kit 01","equipment.proj01","Projector Kit 01","equipment.proj01@los.onl","equipment.proj01@los.onl","FALSE","0","Chicago HQ","+1 555 123 5001"
-"Equipment","Video Cart 01","equipment.video01","Video Cart 01","equipment.video01@los.onl","equipment.video01@los.onl","FALSE","0","Chicago HQ","+1 555 123 5002"
-"Equipment","Surface Hub Mobile 01","equipment.surface01","Surface Hub Mobile 01","equipment.surface01@los.onl","equipment.surface01@los.onl","FALSE","0","Dallas Branch","+1 555 123 5003"
