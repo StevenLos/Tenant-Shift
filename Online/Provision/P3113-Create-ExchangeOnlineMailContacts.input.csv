@@ -1,7 +1,0 @@
-"Name","ExternalEmailAddress","Alias","DisplayName","FirstName","LastName","PrimarySmtpAddress","HiddenFromAddressListsEnabled"
-"Fabrikam Project Manager","fabrikam.pm@fabrikam.com","fabrikam.pm","Fabrikam Project Manager","Fabrikam","PM","fabrikam.pm.external@los.onl","FALSE"
-"Adatum Support Lead","adatum.support@adatum.com","adatum.support","Adatum Support Lead","Adatum","Support","adatum.support.external@los.onl","FALSE"
-"Wingtip Auditor","wingtip.audit@wingtiptoys.com","wingtip.audit","Wingtip Auditor","Wingtip","Auditor","wingtip.audit.external@los.onl","FALSE"
-"Contoso Legal Advisor","contoso.legal@contoso.com","contoso.legal","Contoso Legal Advisor","Contoso","Legal","contoso.legal.external@los.onl","FALSE"
-"Northwind Contractor","northwind.contractor@northwind.com","northwind.contractor","Northwind Contractor","Northwind","Contractor","northwind.contractor.external@los.onl","TRUE"
-"Litware Compliance Advisor","litware.compliance@litware.com","litware.compliance","Litware Compliance Advisor","Litware","Compliance","litware.compliance.external@los.onl","FALSE"

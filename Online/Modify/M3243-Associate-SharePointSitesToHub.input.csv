@@ -1,4 +1,0 @@
-HubSiteUrl,HubSiteId,SiteUrl,EnforceSameTenant,AllowReassociation
-https://los.sharepoint.com/sites/Operations,,https://los.sharepoint.com/sites/HR,TRUE,FALSE
-https://los.sharepoint.com/sites/Operations,,https://los.sharepoint.com/sites/IT,TRUE,FALSE
-https://los.sharepoint.com/sites/Projects,,https://los.sharepoint.com/sites/Finance,TRUE,TRUE
