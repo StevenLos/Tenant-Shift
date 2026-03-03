@@ -1,0 +1,4 @@
+"UserPrincipalName","ExternalUserEmails","RevokeAllExternalUsers","IncludeSiteCollectionAdmins"
+"olivia.bennett@los.onl","partner1@fabrikam.com;guest.ops@outlook.com","FALSE","FALSE"
+"ethan.clark@los.onl","","TRUE","FALSE"
+"mia.rodriguez@los.onl","vendor.user@adatum.com","FALSE","TRUE"

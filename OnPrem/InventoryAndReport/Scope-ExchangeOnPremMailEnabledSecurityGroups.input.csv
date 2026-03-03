@@ -1,0 +1,6 @@
+"SecurityGroupIdentity"
+"*"
+"sec-itadmins@contoso.com"
+"sec-hrconfidential@contoso.com"
+"sec-finance-approvers@contoso.com"
+"sec-ops-escalation@contoso.com"
