@@ -1,6 +1,0 @@
-"InvitedUserEmailAddress","InvitedUserDisplayName","InviteRedirectUrl","SendInvitationMessage","InvitedUserType","CustomMessageBody","CcRecipients"
-"fabrikam.pm@fabrikam.com","Fabrikam Project Manager","https://myapplications.microsoft.com","TRUE","Guest","Welcome to our tenant workspace. Please redeem your invitation.",""
-"adatum.support@adatum.com","Adatum Support Lead","https://myapplications.microsoft.com","TRUE","Guest","Support collaboration access invitation.","ethan.clark@los.onl"
-"wingtip.audit@wingtiptoys.com","Wingtip Auditor","https://myapplications.microsoft.com","TRUE","Guest","Temporary audit access invitation.","noah.patel@los.onl"
-"contoso.legal@contoso.com","Contoso Legal Advisor","https://myapplications.microsoft.com","TRUE","Guest","Legal review collaboration access invitation.","daniel.brooks@los.onl"
-"northwind.contractor@northwind.com","Northwind Contractor","https://myapplications.microsoft.com","TRUE","Guest","Implementation project access invitation.","isabella.ross@los.onl;ava.nguyen@los.onl"

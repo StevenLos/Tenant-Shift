@@ -1,7 +1,0 @@
-"SharedMailboxIdentity","TrusteeIdentity","PermissionType","PermissionAction","AutoMapping"
-"operations-desk@contoso.com","ava.nguyen@contoso.com","FullAccess","Add","TRUE"
-"operations-desk@contoso.com","olivia.bennett@contoso.com","SendAs","Add",""
-"operations-desk@contoso.com","mia.rodriguez@contoso.com","SendOnBehalf","Add",""
-"shared.support@contoso.com","ethan.clark@contoso.com","FullAccess","Add","TRUE"
-"shared.support@contoso.com","henry.flores@contoso.com","SendAs","Add",""
-"shared.support@contoso.com","legacy.delegate@contoso.com","SendOnBehalf","Remove",""
