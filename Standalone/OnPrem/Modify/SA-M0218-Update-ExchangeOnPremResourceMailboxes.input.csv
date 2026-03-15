@@ -1,0 +1,6 @@
+"ResourceMailboxIdentity","DisplayName","PrimarySmtpAddress","Capacity","HiddenFromAddressListsEnabled","AutomateProcessing","BookingWindowInDays","MaximumDurationInMinutes","AllowConflicts","AllBookInPolicy","AllRequestInPolicy","AllRequestOutOfPolicy","EnforceSchedulingHorizon"
+"conf-room-a@contoso.com","Conference Room A","conf-room-a@contoso.com","12","FALSE","AutoAccept","180","240","FALSE","TRUE","FALSE","FALSE","TRUE"
+"conf-room-b@contoso.com","Conference Room B","conf-room-b@contoso.com","10","FALSE","AutoAccept","180","240","FALSE","TRUE","FALSE","FALSE","TRUE"
+"training-room@contoso.com","Training Room","training-room@contoso.com","24","FALSE","AutoAccept","365","480","FALSE","TRUE","FALSE","FALSE","TRUE"
+"equip-projector01@contoso.com","Projector 01","equip-projector01@contoso.com","1","FALSE","AutoAccept","180","720","FALSE","TRUE","FALSE","FALSE","TRUE"
+"equip-vehicle01@contoso.com","Vehicle 01","equip-vehicle01@contoso.com","4","FALSE","AutoAccept","365","1440","TRUE","TRUE","FALSE","FALSE","TRUE"

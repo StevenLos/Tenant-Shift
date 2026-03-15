@@ -1,0 +1,3 @@
+"Action","Notes","UserPrincipalName","AccountEnabled"
+"SetState","Disable account pending departure","former.user@los.onl","FALSE"
+"SetState","Re-enable account after review","returning.user@los.onl","TRUE"

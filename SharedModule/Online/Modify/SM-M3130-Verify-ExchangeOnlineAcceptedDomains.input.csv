@@ -1,0 +1,4 @@
+"DomainName","AttemptVerification","RequireAcceptedDomain","RequireTenantDomain","Notes"
+"newco.com","TRUE","TRUE","TRUE","Attempt verification for newly added production domain"
+"newco-mail.net","TRUE","TRUE","TRUE","Attempt verification for mail routing domain"
+"los.onl","FALSE","TRUE","TRUE","Check current verification status without triggering confirm"

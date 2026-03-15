@@ -1,0 +1,3 @@
+"Action","Notes","GroupMailNickname","GroupDisplayName","Description","MailNickname","MembershipRule","MembershipRuleProcessingState","ClearAttributes"
+"Update","Adjust dynamic rule for Operations","q365dsgoperations","Q365-DSG-Operations","Dynamic users group for Operations (updated)","q365dsgoperations","(user.department -eq \"Operations\") -and (user.usageLocation -eq \"US\")","On",""
+"Update","Pause processing and clear description","q365dsgsales","","","","","Paused","Description"

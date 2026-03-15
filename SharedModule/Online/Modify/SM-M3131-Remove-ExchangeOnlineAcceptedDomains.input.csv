@@ -1,0 +1,4 @@
+"DomainName","RemoveAcceptedDomain","RemoveTenantDomain","ForceRemoval","AllowOnMicrosoftDomainRemoval","Notes"
+"legacy-newco.com","TRUE","FALSE","FALSE","FALSE","Remove accepted-domain object only"
+"legacy-newco.net","TRUE","TRUE","TRUE","FALSE","Remove both accepted-domain and tenant-domain objects"
+"legacy-decom.example","FALSE","TRUE","FALSE","FALSE","Remove tenant-domain object after prior Exchange cleanup"

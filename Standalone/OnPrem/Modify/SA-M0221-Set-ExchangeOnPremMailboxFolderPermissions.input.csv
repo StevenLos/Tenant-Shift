@@ -1,0 +1,7 @@
+"MailboxIdentity","TrusteeIdentity","FolderPath","PermissionAction","AccessRights","CalendarDelegate","CalendarCanViewPrivateItems","SendNotificationToUser"
+"operations-desk@contoso.com","ava.nguyen@contoso.com","Calendar","Add","Editor","TRUE","TRUE","FALSE"
+"operations-desk@contoso.com","mason.carter@contoso.com","Inbox","Add","Reviewer","FALSE","FALSE","FALSE"
+"shared.support@contoso.com","ethan.clark@contoso.com","Calendar","Set","Editor","TRUE","FALSE","TRUE"
+"shared.support@contoso.com","henry.flores@contoso.com","Inbox","Set","Reviewer","FALSE","FALSE","FALSE"
+"project.phoenix@contoso.com","isabella.ross@contoso.com","Calendar","Add","PublishingEditor","TRUE","FALSE","TRUE"
+"project.phoenix@contoso.com","legacy.contractor@contoso.com","Inbox","Remove","","FALSE","FALSE","FALSE"

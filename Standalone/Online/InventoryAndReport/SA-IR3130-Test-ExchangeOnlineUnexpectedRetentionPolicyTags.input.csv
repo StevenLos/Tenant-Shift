@@ -1,0 +1,4 @@
+"MailboxIdentity","ExpectedTagNames","UseAssignedRetentionPolicyTags","Notes"
+"shared.hr@los.onl","Default 2 year move to archive;Delete after 7 years","TRUE","Validate HR mailbox tags against baseline and assigned policy"
+"shared.operations@los.onl","","TRUE","Use only assigned retention policy tags"
+"legacy.user@los.onl","Never Delete","FALSE","Validate against an explicit expected tag set only"
