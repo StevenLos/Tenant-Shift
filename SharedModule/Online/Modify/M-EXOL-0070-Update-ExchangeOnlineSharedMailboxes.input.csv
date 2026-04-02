@@ -1,0 +1,4 @@
+"SharedMailboxIdentity","DisplayName","PrimarySmtpAddress","HiddenFromAddressListsEnabled","GrantSendOnBehalfTo","MessageCopyForSentAsEnabled","MessageCopyForSendOnBehalfEnabled","ForwardingSmtpAddress","DeliverToMailboxAndForward","AuditEnabled","LitigationHoldEnabled"
+"shared.operations@los.onl","Shared Operations Mailbox","shared.operations@los.onl","FALSE","ava.nguyen@los.onl;olivia.bennett@los.onl","TRUE","TRUE","","FALSE","TRUE","FALSE"
+"shared.hr@los.onl","Shared HR Mailbox","shared.hr@los.onl","FALSE","mia.rodriguez@los.onl","TRUE","TRUE","","FALSE","TRUE","TRUE"
+"shared.it@los.onl","Shared IT Mailbox","shared.it@los.onl","FALSE","ethan.clark@los.onl;benjamin.morris@los.onl","TRUE","TRUE","it-ticket-archive@los.onl","TRUE","TRUE","FALSE"
