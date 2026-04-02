@@ -1,4 +1,0 @@
-"MailboxIdentity","AuthenticationProfile","OWAEnabled","MAPIEnabled","IMAPEnabled","POPEnabled","OutlookMobileEnabled","ActiveSyncEnabled","EwsEnabled","EwsAllowOutlook","UniversalOutlookEnabled","OneWinNativeOutlookEnabled","SmtpClientAuthenticationDisabled","Notes"
-"shared.operations@los.onl","DisableClientProtocols","","","","","","","","","","","","Lock down interactive protocols during cutover"
-"shared.hr@los.onl","","TRUE","TRUE","FALSE","FALSE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","Keep modern clients enabled while disabling IMAP/POP and SMTP auth"
-"shared.it@los.onl","EnableAll","","","","","","","","","","","FALSE","Enable full protocol set and explicitly allow SMTP auth"

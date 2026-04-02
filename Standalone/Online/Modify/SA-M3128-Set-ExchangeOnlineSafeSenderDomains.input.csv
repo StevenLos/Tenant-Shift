@@ -1,4 +1,0 @@
-"MailboxIdentity","AddSafeSenderDomains","RemoveSafeSenderDomains","ReplaceAllSafeSenderDomains","ClearSafeSenderDomains","Notes"
-"alex@los.onl","newco.com;trusted.partner.com","","","FALSE","Add two safe sender domains during coexistence"
-"shared.hr@los.onl","","legacy-sender.example","","FALSE","Remove deprecated trusted sender domain"
-"legacy.user@los.onl","newco.com;alerts.newco.com","","","TRUE","Clear existing list and seed with approved domains"

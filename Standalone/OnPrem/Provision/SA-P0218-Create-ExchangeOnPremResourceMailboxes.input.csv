@@ -1,6 +1,0 @@
-"Name","Alias","DisplayName","PrimarySmtpAddress","ResourceType","Capacity","HiddenFromAddressListsEnabled","AutomateProcessing","BookingWindowInDays","MaximumDurationInMinutes","AllowConflicts","AllBookInPolicy","AllRequestInPolicy","AllRequestOutOfPolicy","EnforceSchedulingHorizon"
-"CO-RM-ConfRoomA","cormconfrooma","Conference Room A","conf-room-a@contoso.com","Room","12","FALSE","AutoAccept","180","240","FALSE","TRUE","FALSE","FALSE","TRUE"
-"CO-RM-ConfRoomB","cormconfroomb","Conference Room B","conf-room-b@contoso.com","Room","10","FALSE","AutoAccept","180","240","FALSE","TRUE","FALSE","FALSE","TRUE"
-"CO-RM-TrainingRoom","cormtraining","Training Room","training-room@contoso.com","Room","24","FALSE","AutoAccept","365","480","FALSE","TRUE","FALSE","FALSE","TRUE"
-"CO-RM-Projector01","cormequipproj01","Projector 01","equip-projector01@contoso.com","Equipment","1","FALSE","AutoAccept","180","720","FALSE","TRUE","FALSE","FALSE","TRUE"
-"CO-RM-Vehicle01","cormequipveh01","Vehicle 01","equip-vehicle01@contoso.com","Equipment","4","FALSE","AutoAccept","365","1440","TRUE","TRUE","FALSE","FALSE","TRUE"

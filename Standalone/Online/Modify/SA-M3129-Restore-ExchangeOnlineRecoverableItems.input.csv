@@ -1,4 +1,0 @@
-"MailboxIdentity","SourceFolder","ResultSize","MaxParallelSize","PreviewOnly","Notes"
-"legacy.user@los.onl","RecoverableItems","1000","1","TRUE","Preview recoverable-item restore posture before execution"
-"shared.operations@los.onl","RecoverableItems","2000","2","FALSE","Run recoverable-item restore for operations mailbox"
-"shared.hr@los.onl","RecoverableItems","1500","1","FALSE","Run recoverable-item restore for HR mailbox"

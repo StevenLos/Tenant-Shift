@@ -1,6 +1,0 @@
-"SharedMailboxIdentity","DisplayName","PrimarySmtpAddress","HiddenFromAddressListsEnabled","MessageCopyForSentAsEnabled","MessageCopyForSendOnBehalfEnabled","MailTip"
-"operations-desk@contoso.com","Operations Desk Shared Mailbox","operations-desk@contoso.com","FALSE","TRUE","TRUE","Operations desk mailbox for triage and queue management"
-"shared.support@contoso.com","Support Shared Mailbox","shared.support@contoso.com","FALSE","TRUE","TRUE","Support queue mailbox for Tier 1 and Tier 2"
-"hr-operations@contoso.com","HR Operations Shared Mailbox","hr-operations@contoso.com","FALSE","TRUE","TRUE","HR operations mailbox for confidential workflows"
-"finance-ops@contoso.com","Finance Ops Shared Mailbox","finance-ops@contoso.com","FALSE","TRUE","TRUE","Finance ops mailbox for close and approvals"
-"project.phoenix@contoso.com","Project Phoenix Shared Mailbox","project.phoenix@contoso.com","FALSE","TRUE","TRUE","Program mailbox for project communications"

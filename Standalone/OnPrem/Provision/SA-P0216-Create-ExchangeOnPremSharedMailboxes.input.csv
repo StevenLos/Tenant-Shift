@@ -1,6 +1,0 @@
-"Name","Alias","DisplayName","PrimarySmtpAddress","HiddenFromAddressListsEnabled","MessageCopyForSentAsEnabled","MessageCopyForSendOnBehalfEnabled","MailTip"
-"CO-SMB-OperationsDesk","cosmboperationsdesk","Operations Desk Shared Mailbox","operations-desk@contoso.com","FALSE","TRUE","TRUE","Operations shared mailbox for front-line ticket triage"
-"CO-SMB-Support","cosmbsupport","Support Shared Mailbox","shared.support@contoso.com","FALSE","TRUE","TRUE","Shared support queue mailbox"
-"CO-SMB-HROperations","cosmbhrops","HR Operations Shared Mailbox","hr-operations@contoso.com","FALSE","TRUE","TRUE","HR operations and case coordination mailbox"
-"CO-SMB-FinanceOps","cosmbfinops","Finance Ops Shared Mailbox","finance-ops@contoso.com","FALSE","TRUE","TRUE","Finance operations and approvals mailbox"
-"CO-SMB-ProjectPhoenix","cosmbphoenix","Project Phoenix Shared Mailbox","project.phoenix@contoso.com","FALSE","TRUE","TRUE","Program mailbox for project communications"
