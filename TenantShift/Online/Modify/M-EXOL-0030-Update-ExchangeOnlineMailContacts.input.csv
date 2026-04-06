@@ -1,0 +1,4 @@
+"MailContactIdentity","Name","DisplayName","FirstName","LastName","ExternalEmailAddress","PrimarySmtpAddress","HiddenFromAddressListsEnabled"
+"fabrikam.pm.external@los.onl","Fabrikam PM Contact","Fabrikam Project Manager","Fabrikam","ProjectManager","fabrikam.pm@fabrikam.com","fabrikam.pm.external@los.onl","FALSE"
+"adatum.support.external@los.onl","Adatum Support Contact","Adatum Support Lead","Adatum","Support","adatum.support@adatum.com","adatum.support.external@los.onl","FALSE"
+"northwind.contractor.external@los.onl","Northwind Contractor Contact","Northwind Contractor","Northwind","Contractor","northwind.contractor@northwind.com","northwind.contractor.external@los.onl","TRUE"

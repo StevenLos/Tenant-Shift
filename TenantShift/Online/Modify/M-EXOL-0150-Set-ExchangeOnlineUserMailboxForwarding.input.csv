@@ -1,0 +1,4 @@
+"MailboxIdentity","ForwardingMode","ForwardingSmtpAddress","ForwardingRecipientIdentity","DeliverToMailboxAndForward","ExpectedPrimarySmtpAddress","Notes"
+"alex@los.onl","Smtp","alex.forward@newco.com","","TRUE","alex@los.onl","Transition forwarding to newco domain"
+"helpdesk@los.onl","Recipient","","shared.support@los.onl","FALSE","helpdesk@los.onl","Internal forwarding to shared support mailbox"
+"legacy.user@los.onl","Clear","","","FALSE","legacy.user@los.onl","Clear any existing forwarding"

@@ -1,0 +1,4 @@
+"MailboxIdentity","PrimarySmtpAddress","AddProxyAddresses","RemoveProxyAddresses","ReplaceAllProxyAddresses","ClearSecondaryProxyAddresses","Notes"
+"alex@los.onl","","smtp:alex.newco@newco.com;sip:alex@los.onl","","","FALSE","Add alias and SIP address for transition"
+"helpdesk@los.onl","helpdesk@los.onl","","","SMTP:helpdesk@los.onl;smtp:helpdesk.ops@los.onl;smtp:helpdesk.newco@newco.com","FALSE","Replace full proxy address set with standardized aliases"
+"legacy.user@los.onl","legacy.user@los.onl","smtp:legacy.user@newco.com","","","TRUE","Clear legacy secondary addresses and keep only primary plus new alias"

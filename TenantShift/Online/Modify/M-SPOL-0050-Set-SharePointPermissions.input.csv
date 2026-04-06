@@ -1,0 +1,6 @@
+"SiteUrl","Principal","PermissionLevel","Action"
+"https://los.sharepoint.com/sites/Operations","alice.johnson@los.onl","Read","Grant"
+"https://los.sharepoint.com/sites/Operations","bob.smith@los.onl","Contribute","Grant"
+"https://los.sharepoint.com/sites/Finance","carol.white@los.onl","","Revoke"
+"https://los.sharepoint.com/sites/HumanResources","","","Reset"
+"https://los.sharepoint.com/sites/IT","david.lee@los.onl","Full Control","Grant"

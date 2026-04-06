@@ -1,0 +1,20 @@
+Portion,Path,Required,Purpose
+WorkloadScriptPlanes,TenantShift/Online/Provision,Yes,TenantShift provisioning scripts
+WorkloadScriptPlanes,TenantShift/Online/Modify,Yes,TenantShift modification scripts
+WorkloadScriptPlanes,TenantShift/Online/Discover,Yes,TenantShift discovery/reporting scripts
+WorkloadScriptPlanes,TenantShift/OnPrem/Provision,Yes,TenantShift provisioning scripts
+WorkloadScriptPlanes,TenantShift/OnPrem/Modify,Yes,TenantShift modification scripts
+WorkloadScriptPlanes,TenantShift/OnPrem/Discover,Yes,TenantShift discovery/reporting scripts
+TenantShifts,TenantShift/Common/Online/M365.Common.psm1,Yes,Online shared helper/runtime dependency
+TenantShifts,TenantShift/Common/OnPrem/OnPrem.Common.psm1,Yes,OnPrem shared helper/runtime dependency
+TenantShifts,TenantShift/Common/Shared,Conditional,Cross-environment shared assets
+Documentation,README.md,Yes,Repository-level discoverability and standards
+Documentation,TenantShift/Online/Provision/README-Provision-Catalog.md,Conditional,Catalog updates for online provision scripts
+Documentation,TenantShift/Online/Modify/README-Modify-Catalog.md,Conditional,Catalog updates for online modify scripts
+Documentation,TenantShift/Online/Discover/README-Discover-Catalog.md,Conditional,Catalog updates for online inventory scripts
+Documentation,TenantShift/OnPrem/Provision/README-Provision-Catalog.md,Conditional,Catalog updates for on-prem provision scripts
+Documentation,TenantShift/OnPrem/Modify/README-Modify-Catalog.md,Conditional,Catalog updates for on-prem modify scripts
+Documentation,TenantShift/OnPrem/Discover/README-Discover-Catalog.md,Conditional,Catalog updates for on-prem inventory scripts
+Build,TenantShift/Build/Test-RepositoryContracts.ps1,Conditional,Contract enforcement updates for new script patterns
+Build,TenantShift/Build/Build-OrchestratorWorkbooks.ps1,Conditional,Workbook/orchestrator updates for online additions
+Testing,TenantShift/Tests,Conditional,Automated validation for tenant-shift scripts

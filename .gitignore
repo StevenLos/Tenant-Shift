@@ -1,0 +1,35 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / editor
+.vscode/
+*.suo
+*.user
+
+# Local test artifacts
+testResults.xml
+TestResults*.xml
+TestResults/
+
+# PowerShell artifacts
+*.pssproj.user
+*.nupkg
+
+# Credentials & certificates — never commit secrets
+*.credential
+*.pfx
+*.p12
+*Secret*.txt
+*secret*.txt
+*Credential*.txt
+*credential*.txt
+
+# Generated outputs (keep folder README placeholders tracked)
+**/Provision_OutputCsvPath/Results_*.csv
+**/Provision_OutputCsvPath/Transcript_*.log
+**/Modify_OutputCsvPath/Results_*.csv
+**/Modify_OutputCsvPath/Transcript_*.log
+**/InventoryAndReport_OutputCsvPath/Results_*.csv
+**/InventoryAndReport_OutputCsvPath/Transcript_*.log

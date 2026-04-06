@@ -1,0 +1,6 @@
+"SiteUrl","LockState"
+"https://los.sharepoint.com/sites/Operations","ReadOnly"
+"https://los.sharepoint.com/sites/Finance","NoAccess"
+"https://los.sharepoint.com/sites/Archive","NoAccess"
+"https://los.sharepoint.com/sites/HumanResources","Unlock"
+"https://los.sharepoint.com/sites/IT","ReadOnly"

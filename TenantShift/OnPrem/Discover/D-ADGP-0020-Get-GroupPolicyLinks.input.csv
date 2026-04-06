@@ -1,0 +1,6 @@
+"ScopeDn"
+"DC=los,DC=local"
+"OU=Workstations,DC=los,DC=local"
+"OU=Servers,DC=los,DC=local"
+"OU=Users,DC=los,DC=local"
+"OU=Domain Controllers,DC=los,DC=local"
