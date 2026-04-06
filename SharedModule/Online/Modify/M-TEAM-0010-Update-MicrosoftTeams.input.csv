@@ -1,4 +1,0 @@
-"TeamMailNickname","TeamDisplayName","Description","Visibility","AllowCreateUpdateChannels","AllowDeleteChannels","AllowAddRemoveApps","AllowCreateUpdateRemoveTabs","AllowCreateUpdateRemoveConnectors","AllowUserEditMessages","AllowUserDeleteMessages","AllowOwnerDeleteMessages","AllowTeamMentions","AllowChannelMentions","AllowGiphy","GiphyContentRating","AllowStickersAndMemes","AllowCustomMemes","ClearAttributes"
-"q365m365operations","Q365 Team Operations Core","Operations collaboration space","Private","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","Strict","TRUE","TRUE",""
-"q365m365projects","","","Public","TRUE","TRUE","FALSE","TRUE","FALSE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","Moderate","TRUE","TRUE","Description"
-"q365m365hr","Q365 Team Human Resources","HR private collaboration space","Private","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","FALSE","TRUE","TRUE","TRUE","FALSE","Strict","TRUE","FALSE",""

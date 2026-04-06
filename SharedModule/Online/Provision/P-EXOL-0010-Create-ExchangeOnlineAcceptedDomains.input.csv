@@ -1,4 +1,0 @@
-"DomainName","AcceptedDomainName","DomainType","SetAsDefault","MatchSubDomains","AutoCreateTenantDomain","Notes"
-"newco.com","NewCo Primary Domain","Authoritative","FALSE","FALSE","TRUE","Create primary newco accepted domain and auto-create tenant domain"
-"newco-mail.net","NewCo Mail Routing","InternalRelay","FALSE","TRUE","TRUE","Create relay domain for coexistence routing"
-"newco-archive.org","NewCo Archive Domain","Authoritative","FALSE","FALSE","TRUE","Create archive domain for mailbox archive aliases"

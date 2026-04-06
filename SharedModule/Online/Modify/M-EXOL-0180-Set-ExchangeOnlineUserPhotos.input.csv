@@ -1,4 +1,0 @@
-"MailboxIdentity","PhotoPath","RemovePhoto","PreviewOnly","Notes"
-"alex@los.onl","Samples/Photos/alex.jpg","FALSE","FALSE","Set new profile photo from local file"
-"mia.rodriguez@los.onl","Samples/Photos/mia.jpg","FALSE","TRUE","Stage preview photo update without committing"
-"legacy.user@los.onl","","TRUE","FALSE","Remove outdated mailbox photo"

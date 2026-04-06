@@ -1,3 +1,0 @@
-"Action","Notes","AllowGroupCreation","AllowedGroupIdentityType","AllowedGroupIdentityValue","ClearAllowedGroup"
-"Update","Limit M365 group creation to Operations group","FALSE","MailNickname","q365sgoperations","FALSE"
-"Update","Re-enable M365 group creation for all users","TRUE","","","TRUE"
