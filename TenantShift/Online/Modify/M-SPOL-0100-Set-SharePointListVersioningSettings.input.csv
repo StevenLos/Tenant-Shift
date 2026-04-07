@@ -1,0 +1,6 @@
+"SiteUrl","ListName","EnableVersioning","MajorVersionLimit","EnableMinorVersions"
+"https://los.sharepoint.com/sites/projectalpha","Documents","True","50","True"
+"https://los.sharepoint.com/sites/projectalpha","Tasks","True","10",""
+"https://los.sharepoint.com/sites/hr","","True","25","False"
+"https://los.sharepoint.com/sites/finance","Contracts","True","100","True"
+"https://los.sharepoint.com/sites/archive-2023","","False","",""

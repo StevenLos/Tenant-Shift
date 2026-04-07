@@ -1,0 +1,6 @@
+"SiteUrl","ListName","Title","Category","Priority","DueDate","AssignedTo"
+"https://los.sharepoint.com/sites/projectalpha","Migration Tasks","Validate mailbox migration","Exchange","High","2026-05-01",""
+"https://los.sharepoint.com/sites/projectalpha","Migration Tasks","Validate SharePoint migration","SharePoint","High","2026-05-15",""
+"https://los.sharepoint.com/sites/projectalpha","Migration Tasks","Cutover sign-off","All","Critical","2026-06-01",""
+"https://los.sharepoint.com/sites/hr","Announcements","Migration maintenance window","General","","2026-04-30",""
+"https://los.sharepoint.com/sites/it","Migration Tasks","Decommission source tenant","Infrastructure","Medium","2026-07-01",""

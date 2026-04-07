@@ -1,0 +1,6 @@
+"SiteUrl","ArtifactTrackerListName","SourcePath","DestinationPath","MigrationType","MigrationStatus","Notes"
+"https://los.sharepoint.com/sites/it","Migration Tracker","user1@source.onmicrosoft.com","user1@los.onl","Mailbox","Pending","Wave 1 — priority user"
+"https://los.sharepoint.com/sites/it","Migration Tracker","user2@source.onmicrosoft.com","user2@los.onl","Mailbox","Pending","Wave 1 — priority user"
+"https://los.sharepoint.com/sites/it","Migration Tracker","https://source.sharepoint.com/sites/projectalpha","https://los.sharepoint.com/sites/projectalpha","Site","Pending","Migrate after mailboxes complete"
+"https://los.sharepoint.com/sites/it","Migration Tracker","\\fileserver01\shares\hr","https://los.sharepoint.com/sites/hr","FileShare","Pending","Requires Wave 9C scope unlock"
+"https://los.sharepoint.com/sites/it","Migration Tracker","HR Team","HR","Team","Pending","Teams migration — Wave 9D"

@@ -1,0 +1,6 @@
+"SiteUrl","LibraryName","Description","EnableVersioning","MajorVersionLimit"
+"https://los.sharepoint.com/sites/projectalpha","Migration Source Files","Source files staged for migration","True","500"
+"https://los.sharepoint.com/sites/projectalpha","Archive","Pre-migration archive documents","True","100"
+"https://los.sharepoint.com/sites/hr","Policies","HR policy documents","True","50"
+"https://los.sharepoint.com/sites/finance","Contracts","Legal contracts and agreements","True","200"
+"https://los.sharepoint.com/sites/it","Scripts","IT scripts and automation files","True","0"

@@ -1,0 +1,6 @@
+"UserPrincipalName","DelegationType","DelegateAccount"
+"migrationwiz-svc@los.onl","Impersonation",""
+"user1@los.onl","FullAccess","migrationwiz-svc@los.onl"
+"user2@los.onl","FullAccess","migrationwiz-svc@los.onl"
+"user3@los.onl","FullAccess","migrationwiz-svc@los.onl"
+"shared-mailbox@los.onl","FullAccess","migrationwiz-svc@los.onl"

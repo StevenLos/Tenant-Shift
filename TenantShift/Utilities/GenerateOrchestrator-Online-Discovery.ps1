@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-    Generates Discover-Orchestrator.xlsx via Excel COM automation.
+    Generates Discover-Orchestrator-Online.xlsx for Online scripts via Excel COM automation.
 #>
 [CmdletBinding()]
 param(
-    [string]$OutputPath = "$PSScriptRoot\Discover-Orchestrator.xlsx"
+    [string]$OutputPath = "$PSScriptRoot\Discover-Orchestrator-Online.xlsx"
 )
 
 Set-StrictMode -Version Latest
@@ -43,6 +43,10 @@ $catalog = @(
     [pscustomobject]@{Workload='EXOL';ID='D-EXOL-0260';Desc='Get Exchange Online User Mailbox SMTP Addresses';        File='D-EXOL-0260-Get-ExchangeOnlineUserMailboxSmtpAddresses.ps1';                InputCsv='Scope-Mailboxes.input.csv';NeedsSP='No'}
     [pscustomobject]@{Workload='EXOL';ID='D-EXOL-0270';Desc='Get Exchange Online Shared Mailbox SMTP Addresses';      File='D-EXOL-0270-Get-ExchangeOnlineSharedMailboxSmtpAddresses.ps1';              InputCsv='Scope-SharedMailboxes.input.csv';NeedsSP='No'}
     [pscustomobject]@{Workload='EXOL';ID='D-EXOL-0280';Desc='Test Exchange Online Unexpected Retention Policy Tags';  File='D-EXOL-0280-Test-ExchangeOnlineUnexpectedRetentionPolicyTags.ps1';          InputCsv='D-EXOL-0280-Test-ExchangeOnlineUnexpectedRetentionPolicyTags.input.csv';NeedsSP='No'}
+    [pscustomobject]@{Workload='EXOL';ID='D-EXOL-0290';Desc='Get Exchange Online Email DNS Audit';                    File='D-EXOL-0290-Get-ExchangeOnlineEmailDnsAudit.ps1';                           InputCsv='D-EXOL-0290-Get-ExchangeOnlineEmailDnsAudit.input.csv';NeedsSP='No'}
+    [pscustomobject]@{Workload='EXOL';ID='D-EXOL-0300';Desc='Get Exchange Online Inbox Rule Forwarding';              File='D-EXOL-0300-Get-ExchangeOnlineInboxRuleForwarding.ps1';                     InputCsv='D-EXOL-0300-Get-ExchangeOnlineInboxRuleForwarding.input.csv';NeedsSP='No'}
+    [pscustomobject]@{Workload='EXOL';ID='D-EXOL-0310';Desc='Get Exchange Online Mailbox Forwarding';                 File='D-EXOL-0310-Get-ExchangeOnlineMailboxForwarding.ps1';                       InputCsv='D-EXOL-0310-Get-ExchangeOnlineMailboxForwarding.input.csv';NeedsSP='No'}
+    [pscustomobject]@{Workload='EXOL';ID='D-EXOL-0320';Desc='Get Exchange Online Transport Rule Forwarding';          File='D-EXOL-0320-Get-ExchangeOnlineTransportRuleForwarding.ps1';                 InputCsv='';ScopeMode='None';NeedsSP='No'}
     [pscustomobject]@{Workload='ONDR';ID='D-ONDR-0010';Desc='Get OneDrive Provisioning Status';                       File='D-ONDR-0010-Get-OneDriveProvisioningStatus.ps1';                            InputCsv='Scope-Users.input.csv';NeedsSP='Yes'}
     [pscustomobject]@{Workload='ONDR';ID='D-ONDR-0020';Desc='Get OneDrive Storage and Quota';                         File='D-ONDR-0020-Get-OneDriveStorageAndQuota.ps1';                               InputCsv='Scope-Users.input.csv';NeedsSP='Yes'}
     [pscustomobject]@{Workload='ONDR';ID='D-ONDR-0030';Desc='Get OneDrive Site Collection Admins';                    File='D-ONDR-0030-Get-OneDriveSiteCollectionAdmins.ps1';                          InputCsv='Scope-Users.input.csv';NeedsSP='Yes'}
@@ -50,6 +54,7 @@ $catalog = @(
     [pscustomobject]@{Workload='ONDR';ID='D-ONDR-0050';Desc='Get OneDrive External Sharing Links';                    File='D-ONDR-0050-Get-OneDriveExternalSharingLinks.ps1';                          InputCsv='Scope-Users.input.csv';NeedsSP='Yes'}
     [pscustomobject]@{Workload='ONDR';ID='D-ONDR-0060';Desc='Get OneDrive Site Lock State';                           File='D-ONDR-0060-Get-OneDriveSiteLockState.ps1';                                 InputCsv='Scope-Users.input.csv';NeedsSP='Yes'}
     [pscustomobject]@{Workload='SPOL';ID='D-SPOL-0010';Desc='Get SharePoint Sites';                                   File='D-SPOL-0010-Get-SharePointSites.ps1';                                       InputCsv='Scope-SharePointSites.input.csv';NeedsSP='Yes'}
+    [pscustomobject]@{Workload='SPOL';ID='D-SPOL-0020';Desc='Get SharePoint Site Permissions';                        File='D-SPOL-0020-Get-SharePointSitePermissions.ps1';                             InputCsv='D-SPOL-0020-Get-SharePointSitePermissions.input.csv';NeedsSP='Yes'}
     [pscustomobject]@{Workload='TEAM';ID='D-TEAM-0010';Desc='Get Microsoft Teams';                                    File='D-TEAM-0010-Get-MicrosoftTeams.ps1';                                        InputCsv='Scope-Teams.input.csv';NeedsSP='No'}
     [pscustomobject]@{Workload='TEAM';ID='D-TEAM-0020';Desc='Get Microsoft Team Members';                             File='D-TEAM-0020-Get-MicrosoftTeamMembers.ps1';                                  InputCsv='Scope-Teams.input.csv';NeedsSP='No'}
     [pscustomobject]@{Workload='TEAM';ID='D-TEAM-0030';Desc='Get Microsoft Team Channels';                            File='D-TEAM-0030-Get-MicrosoftTeamChannels.ps1';                                 InputCsv='Scope-Teams.input.csv';NeedsSP='No'}
@@ -82,6 +87,8 @@ $warnFg   = clr '843C0C'
 $greenBg  = clr 'E2EFDA'
 $greenFg  = clr '375623'
 $greyText = clr 'A6A6A6'
+$redBg    = clr 'FFC7CE'
+$redFg    = clr '9C0006'
 
 # ─── Excel COM bootstrap ──────────────────────────────────────────────────────
 $xl = New-Object -ComObject Excel.Application
@@ -134,16 +141,24 @@ try {
     $cfgSh.Range('C6').Value2 = 'Optional. Leave blank to use script default (timestamped file in Discover_OutputCsvPath\).'
     $cfgSh.Range('C6').Font.Italic = $true; $cfgSh.Range('C6').Font.Color = $darkGrey
 
-    foreach ($r in 4,5,6) { $cfgSh.Rows.Item($r).RowHeight = 18 }
+    $cfgSh.Range('A7').Value2 = 'Include pwsh Prefix'; $cfgSh.Range('A7').Font.Bold = $true
+    $cfgSh.Range('B7').Value2 = 'Yes'
+    $cfgSh.Range('B7').Interior.Color = $editBg
+    $cfgSh.Range('C7').Value2 = 'Set to Yes to prepend pwsh to each generated command. Set to No to omit the prefix (e.g. when the shell is handled externally).'
+    $cfgSh.Range('C7').Font.Italic = $true; $cfgSh.Range('C7').Font.Color = $darkGrey
+    $cfgSh.Range('B7').Validation.Delete()
+    $cfgSh.Range('B7').Validation.Add(3, 1, 1, 'Yes,No')
 
-    # PnP note row 8
-    $cfgSh.Range('A8').Value2 = 'PnP Note'; $cfgSh.Range('A8').Font.Bold = $true
-    $cfgSh.Range('B8:C8').Merge()
-    $cfgSh.Range('B8').Value2 = 'ONDR and SPOL scripts use PnP.PowerShell and require a registered Entra app. Set the PNP_CLIENT_ID environment variable before running (or pass -ClientId to Connect-PnPOnline). See RUNBOOK-Discover.md §1 for setup.'
-    $cfgSh.Range('B8').WrapText = $true
-    $cfgSh.Range('B8').Font.Italic = $true; $cfgSh.Range('B8').Font.Color = $warnFg
-    $cfgSh.Range('B8').Interior.Color = $warnBg
-    $cfgSh.Rows.Item(8).RowHeight = 48
+    foreach ($r in 4,5,6,7) { $cfgSh.Rows.Item($r).RowHeight = 18 }
+
+    # PnP note row 9
+    $cfgSh.Range('A9').Value2 = 'PnP Note'; $cfgSh.Range('A9').Font.Bold = $true
+    $cfgSh.Range('B9:C9').Merge()
+    $cfgSh.Range('B9').Value2 = 'ONDR and SPOL scripts use PnP.PowerShell and require a registered Entra app. Set the PNP_CLIENT_ID environment variable before running (or pass -ClientId to Connect-PnPOnline). See RUNBOOK-Discover.md §1 for setup.'
+    $cfgSh.Range('B9').WrapText = $true
+    $cfgSh.Range('B9').Font.Italic = $true; $cfgSh.Range('B9').Font.Color = $warnFg
+    $cfgSh.Range('B9').Interior.Color = $warnBg
+    $cfgSh.Rows.Item(9).RowHeight = 48
 
     $cfgSh.Columns.Item(1).ColumnWidth = 24
     $cfgSh.Columns.Item(2).ColumnWidth = 52
@@ -153,6 +168,7 @@ try {
     $wb.Names.Add('cfg_ScriptRoot',         '=Config!$B$4') | Out-Null
     $wb.Names.Add('cfg_SharePointAdminUrl', '=Config!$B$5') | Out-Null
     $wb.Names.Add('cfg_OutputCsvPath',      '=Config!$B$6') | Out-Null
+    $wb.Names.Add('cfg_PwshPrefix',         '=Config!$B$7') | Out-Null
 
     # ══════════════════════════════════════════════════════════════════════════
     # SCRIPTS SHEET
@@ -187,7 +203,7 @@ try {
         $scrSh.Range("D${row}").Value2 = $s.ID
         $scrSh.Range("E${row}").Value2 = $s.Desc
         $scrSh.Range("F${row}").Value2 = $s.File
-        $scrSh.Range("G${row}").Value2 = 'InputCsvPath'
+        $scrSh.Range("G${row}").Value2 = if ($s.PSObject.Properties.Name -contains 'ScopeMode') { $s.ScopeMode } else { 'InputCsvPath' }
         $scrSh.Range("H${row}").Value2 = $s.InputCsv
         $scrSh.Range("I${row}").Value2 = $s.NeedsSP
 
@@ -203,10 +219,14 @@ try {
     # Generated Command formulas — column J
     # Note: """ in PS single-quoted string = 3 literal " chars = Excel escaped-quote idiom
     for ($row = $DR; $row -le $lastRow; $row++) {
-        $f = '=IF(B' + $row + '="Yes","pwsh "&cfg_ScriptRoot&"/TenantShift/Online/Discover/"&F' + $row +
-             '&IF(G' + $row + '="DiscoverAll"," -DiscoverAll"," -InputCsvPath """&cfg_ScriptRoot&"/TenantShift/Online/Discover/"&H' + $row + '&"""")' +
+        $f = '=IF(B' + $row + '="Yes",' +
+             'IF(AND(I' + $row + '="Yes",cfg_SharePointAdminUrl=""),' +
+             '"** SP Admin URL required — fill Config!B5 before running **",' +
+             'IF(cfg_PwshPrefix="Yes","pwsh ","")&cfg_ScriptRoot&"/TenantShift/Online/Discover/"&F' + $row +
+             '&IF(G' + $row + '="DiscoverAll"," -DiscoverAll",IF(G' + $row + '="None",""," -InputCsvPath """&cfg_ScriptRoot&"/TenantShift/Online/Discover/"&H' + $row + '&""""))' +
              '&IF(AND(I' + $row + '="Yes",cfg_SharePointAdminUrl<>"")," -SharePointAdminUrl """&cfg_SharePointAdminUrl&"""","")' +
-             '&IF(cfg_OutputCsvPath<>""," -OutputCsvPath """&cfg_OutputCsvPath&"""",""),"")'
+             '&IF(cfg_OutputCsvPath<>""," -OutputCsvPath """&cfg_OutputCsvPath&"""","")' +
+             '),"")'
         $scrSh.Range("J${row}").Formula   = $f
         $scrSh.Range("J${row}").Font.Name = 'Consolas'
         $scrSh.Range("J${row}").Font.Size = 9
@@ -221,7 +241,7 @@ try {
     # Data validation: Scope Mode (G) — InputCsvPath/DiscoverAll dropdown
     $gRng = $scrSh.Range("G${DR}:G${lastRow}")
     $gRng.Validation.Delete()
-    $gRng.Validation.Add(3, 1, 1, 'InputCsvPath,DiscoverAll')
+    $gRng.Validation.Add(3, 1, 1, 'InputCsvPath,DiscoverAll,None')
 
     # Conditional formatting: Include col B — Yes = green, No = grey
     $cfRng = $scrSh.Range("B${DR}:B${lastRow}")
@@ -230,6 +250,12 @@ try {
     $fc.Interior.Color = $greenBg; $fc.Font.Color = $greenFg; $fc.Font.Bold = $true
     $fc = $cfRng.FormatConditions.Add(1, 3, 'No')
     $fc.Interior.Color = $lockBg;  $fc.Font.Color = $greyText
+
+    # Conditional formatting: Generated Command col J — red when SP required and URL blank
+    $jRng = $scrSh.Range("J${DR}:J${lastRow}")
+    $jRng.FormatConditions.Delete()
+    $fc = $jRng.FormatConditions.Add(2, 1, '=AND($I' + $DR + '="Yes",cfg_SharePointAdminUrl="")')
+    $fc.Interior.Color = $redBg; $fc.Font.Color = $redFg; $fc.Font.Bold = $true
 
     # Column widths (integer indices: A=1 … J=10)
     $scrSh.Columns.Item(1).ColumnWidth  =  4   # #
@@ -266,7 +292,7 @@ try {
     $runSh.Rows.Item(2).RowHeight  = 24
 
     # FILTER formula — spills one command per included script
-    $runSh.Range('A3').Formula   = '=IFERROR(FILTER(Scripts!J$2:J$41,Scripts!B$2:B$41="Yes"),"No scripts selected — set Include = Yes on the Scripts sheet.")'
+    $runSh.Range('A3').Formula   = '=IFERROR(FILTER(Scripts!J$2:J$' + $lastRow + ',Scripts!B$2:B$' + $lastRow + '="Yes"),"No scripts selected — set Include = Yes on the Scripts sheet.")'
     $runSh.Range('A3').Font.Name = 'Consolas'
     $runSh.Range('A3').Font.Size = 9
     $runSh.Columns.Item(1).ColumnWidth = 160

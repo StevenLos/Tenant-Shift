@@ -1,0 +1,6 @@
+"SiteUrl","FeatureId","FeatureScope","Action","FeatureName"
+"https://los.sharepoint.com/sites/projectalpha","87294c72-f0d4-4fe3-9ce8-3a8a5e931b91","Web","Enable","TeamCollaborationLists"
+"https://los.sharepoint.com/sites/projectalpha","00bfea71-5932-4f9c-a15b-d7e65a71a4d4","Web","Enable","WikiPageHome"
+"https://los.sharepoint.com/sites/hr","3a4ce811-6fe0-4e97-a6ae-675470282cf2","Site","Enable","PublishingInfrastructure"
+"https://los.sharepoint.com/sites/finance","87294c72-f0d4-4fe3-9ce8-3a8a5e931b91","Web","Disable","TeamCollaborationLists"
+"https://los.sharepoint.com/sites/it","00bfea71-de22-4796-8c2d-3c4233e7b82c","Site","Enable","DocumentLibrary"
