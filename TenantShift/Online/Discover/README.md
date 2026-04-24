@@ -4,7 +4,7 @@
 
 Operational label: **Discover**.
 
-Current status: inventory/report coverage includes Entra, Exchange Online, OneDrive, SharePoint, and Teams with dual discovery scope support (`-InputCsvPath` or `-DiscoverAll`), including Entra privileged-role inventory plus flattened Microsoft 365 group owner/member reporting, Exchange accepted-domain verification records plus mailbox analytics/permission consolidations/retention-tag tests and user/shared-mailbox SMTP-address reporting, OneDrive sharing/lock/external-principal reporting, and Teams channel-member reporting.
+Current status: inventory/report coverage includes Entra, Exchange Online, OneDrive, SharePoint, and Teams with dual discovery scope support (`-InputCsvPath` or `-DiscoverAll`), including Entra privileged-role inventory plus flattened Microsoft 365 group owner/member reporting, Exchange accepted-domain verification records plus mailbox analytics/permission consolidations/retention-tag tests and user/shared-mailbox SMTP-address reporting, OneDrive sharing/lock/external-principal reporting, and Teams channel-member reporting. A user-centric entitlement reconstruction series (0500 sequence) is implemented across MEID, EXOL, SPOL, and TEAM — these scripts take a user list as input and produce explainable access footprints with path attribution.
 
 ## Purpose
 
@@ -68,6 +68,13 @@ pwsh ./TenantShift/Online/Discover/D-EXOL-0100-Get-ExchangeOnlineMailEnabledSecu
 pwsh ./TenantShift/Online/Discover/D-TEAM-0010-Get-MicrosoftTeams.ps1 -InputCsvPath ./TenantShift/Online/Discover/Scope-Teams.input.csv
 pwsh ./TenantShift/Online/Discover/D-SPOL-0010-Get-SharePointSites.ps1 -InputCsvPath ./TenantShift/Online/Discover/Scope-SharePointSites.input.csv -SharePointAdminUrl https://contoso-admin.sharepoint.com
 pwsh ./TenantShift/Online/Discover/D-TEAM-0040-Get-MicrosoftTeamChannelMembers.ps1 -InputCsvPath ./TenantShift/Online/Discover/D-TEAM-0040-Get-MicrosoftTeamChannelMembers.input.csv
+pwsh ./TenantShift/Online/Discover/D-MEID-0500-Get-EntraAssignedGroupsByUser.ps1 -InputCsvPath ./TenantShift/Online/Discover/Scope-Users.input.csv
+pwsh ./TenantShift/Online/Discover/D-MEID-0510-Get-EntraDynamicGroupsByUser.ps1 -InputCsvPath ./TenantShift/Online/Discover/Scope-Users.input.csv
+pwsh ./TenantShift/Online/Discover/D-MEID-0520-Get-EntraM365GroupsByUser.ps1 -InputCsvPath ./TenantShift/Online/Discover/Scope-Users.input.csv
+pwsh ./TenantShift/Online/Discover/D-EXOL-0500-Get-ExchangeOnlineMailboxAccessByUser.ps1 -InputCsvPath ./TenantShift/Online/Discover/Scope-Users.input.csv
+pwsh ./TenantShift/Online/Discover/D-SPOL-0500-Get-SharePointSitesByUser.ps1 -InputCsvPath ./TenantShift/Online/Discover/Scope-Users.input.csv -SharePointAdminUrl https://contoso-admin.sharepoint.com
+pwsh ./TenantShift/Online/Discover/D-TEAM-0500-Get-MicrosoftTeamsByUser.ps1 -InputCsvPath ./TenantShift/Online/Discover/Scope-Users.input.csv
+pwsh ./TenantShift/Online/Discover/D-TEAM-0510-Get-MicrosoftTeamChannelsByUser.ps1 -InputCsvPath ./TenantShift/Online/Discover/Scope-Users.input.csv
 ```
 
 Discover-all pattern examples:
@@ -103,7 +110,7 @@ Use shared scope CSVs when multiple scripts use the same object key:
 
 | Scope File | Key Column(s) | Reused By |
 |---|---|---|
-| `Scope-Users.input.csv` | `UserPrincipalName` | `D-MEID-0010`, `D-MEID-0030`, `D-ONDR-0010`, `D-ONDR-0020`, `D-ONDR-0030`, `D-ONDR-0040`, `D-ONDR-0050`, `D-ONDR-0060` |
+| `Scope-Users.input.csv` | `UserPrincipalName` | `D-MEID-0010`, `D-MEID-0030`, `D-ONDR-0010`, `D-ONDR-0020`, `D-ONDR-0030`, `D-ONDR-0040`, `D-ONDR-0050`, `D-ONDR-0060`, `D-MEID-0500`, `D-MEID-0510`, `D-MEID-0520`, `D-EXOL-0500`, `D-SPOL-0500`, `D-TEAM-0500`, `D-TEAM-0510` |
 | `Scope-GuestUsers.input.csv` | `UserPrincipalName` | `D-MEID-0020` |
 | `Scope-EntraPrivilegedRoles.input.csv` | `RoleDisplayName` | `D-MEID-0060` |
 | `Scope-EntraSecurityGroups.input.csv` | `GroupDisplayName` | `D-MEID-0070`, `D-MEID-0090` |
@@ -242,6 +249,13 @@ Discovery scripts should export consistent, easy-to-diff output:
 | D-EXOL-0260 | `D-EXOL-0260-Get-ExchangeOnlineUserMailboxSmtpAddresses.ps1` | Exchange Online | Export one-row-per-SMTP-address user mailbox inventory for primary and alias addresses. | Implemented |
 | D-EXOL-0270 | `D-EXOL-0270-Get-ExchangeOnlineSharedMailboxSmtpAddresses.ps1` | Exchange Online | Export one-row-per-SMTP-address shared mailbox inventory for primary and alias addresses. | Implemented |
 | D-SPOL-0010 | `D-SPOL-0010-Get-SharePointSites.ps1` | SharePoint | Export SharePoint site inventory and core metadata. | Implemented |
+| D-MEID-0500 | `D-MEID-0500-Get-EntraAssignedGroupsByUser.ps1` | Entra | Assigned security group memberships per user — direct and transitive with full path attribution. | Implemented |
+| D-MEID-0510 | `D-MEID-0510-Get-EntraDynamicGroupsByUser.ps1` | Entra | Dynamic security group evaluated memberships per user. | Implemented |
+| D-MEID-0520 | `D-MEID-0520-Get-EntraM365GroupsByUser.ps1` | Entra | Microsoft 365 group member and owner relationships per user. | Implemented |
+| D-EXOL-0500 | `D-EXOL-0500-Get-ExchangeOnlineMailboxAccessByUser.ps1` | Exchange Online | Effective mailbox access per user across shared, resource, and equipment mailboxes with direct/group attribution. | Implemented |
+| D-SPOL-0500 | `D-SPOL-0500-Get-SharePointSitesByUser.ps1` | SharePoint | SharePoint site access per user across all access paths with assignment chain. | Implemented |
+| D-TEAM-0500 | `D-TEAM-0500-Get-MicrosoftTeamsByUser.ps1` | Teams | Teams membership and ownership per user with role and access type. | Implemented |
+| D-TEAM-0510 | `D-TEAM-0510-Get-MicrosoftTeamChannelsByUser.ps1` | Teams | Teams channel access per user by channel type with cross-tenant detection. | Implemented |
 
 ## Discover Standards
 

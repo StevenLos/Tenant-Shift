@@ -144,6 +144,8 @@ Use this for full-environment audits, baseline captures, or when you do not have
 
 > **Note:** DiscoverAll runs against the full tenant. For large environments this can take significant time and consume API quota. Avoid running DiscoverAll repeatedly in quick succession — use the CSV output from a previous run to target specific objects instead.
 
+> **Note — 0500-series scripts:** The user-centric entitlement scripts (`D-MEID-0500`, `D-MEID-0510`, `D-MEID-0520`, `D-EXOL-0500`, `D-SPOL-0500`, `D-TEAM-0500`, `D-TEAM-0510`) behave differently under `-DiscoverAll`. Instead of enumerating all resources of a type, they enumerate **all licensed users** in the tenant and process each one. These scripts also perform additional inline Graph calls per user (group membership resolution, M365 group checks, Teams owner lookups) that the baseline inventory scripts do not. For large tenants, provide a scoped `Scope-Users.input.csv` via `-InputCsvPath` rather than using `-DiscoverAll` unless a full-tenant entitlement sweep is explicitly required.
+
 ### EXO Result Truncation Warning (Repeated)
 
 > **Warning:** When running Exchange Online D scripts in `-DiscoverAll` mode, the platform passes `-ResultSize Unlimited` automatically. If you call EXO cmdlets directly in a custom script, you **must** include `-ResultSize Unlimited` or output will be silently truncated.

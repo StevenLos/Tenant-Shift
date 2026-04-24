@@ -4,7 +4,7 @@ Detailed catalog for discovery/reporting scripts in `TenantShift/Online/Discover
 
 Operational label: **Discover**.
 
-Current implementation status: MEID, TEAM, EXOL, ONDR, and SPOL discover scripts are implemented with expanded coverage including flattened Microsoft 365 group owner/member exports, shared-mailbox SMTP-address exports, accepted-domain verification records, mailbox analytics, consolidated permissions, and retention-tag tests.
+Current implementation status: MEID, TEAM, EXOL, ONDR, and SPOL discover scripts are implemented with expanded coverage including flattened Microsoft 365 group owner/member exports, shared-mailbox SMTP-address exports, accepted-domain verification records, mailbox analytics, consolidated permissions, and retention-tag tests. A user-centric entitlement reconstruction series (0500 sequence) has been added across MEID, EXOL, SPOL, and TEAM workloads — these scripts take a user list as input and produce explainable access footprints with path attribution across all M365 workloads.
 
 ## Script Contract
 
@@ -67,6 +67,13 @@ All discover scripts should:
 | D-TEAM-0020 | `D-TEAM-0020-Get-MicrosoftTeamMembers.ps1` | `Scope-Teams.input.csv` | TEAM | Team owner/member assignments | Implemented |
 | D-TEAM-0030 | `D-TEAM-0030-Get-MicrosoftTeamChannels.ps1` | `Scope-Teams.input.csv` | TEAM | Channel inventory by Team | Implemented |
 | D-TEAM-0040 | `D-TEAM-0040-Get-MicrosoftTeamChannelMembers.ps1` | `D-TEAM-0040-Get-MicrosoftTeamChannelMembers.input.csv` | TEAM | Private/shared channel membership | Implemented |
+| D-MEID-0500 | `D-MEID-0500-Get-EntraAssignedGroupsByUser.ps1` | `Scope-Users.input.csv` | MEID | Assigned security group memberships per user — direct and transitive with full membership path attribution | Implemented |
+| D-MEID-0510 | `D-MEID-0510-Get-EntraDynamicGroupsByUser.ps1` | `Scope-Users.input.csv` | MEID | Dynamic security group evaluated memberships per user — based on confirmed evaluated membership, not rule text | Implemented |
+| D-MEID-0520 | `D-MEID-0520-Get-EntraM365GroupsByUser.ps1` | `Scope-Users.input.csv` | MEID | Microsoft 365 group member and owner relationships per user with Relationship column (Member/Owner/Member+Owner) | Implemented |
+| D-EXOL-0500 | `D-EXOL-0500-Get-ExchangeOnlineMailboxAccessByUser.ps1` | `Scope-Users.input.csv` | EXOL | Effective mailbox access per user across shared, resource, and equipment mailboxes — Full Access, ReadOnly, Send As, Send on Behalf — with direct/group-sourced attribution | Implemented |
+| D-SPOL-0500 | `D-SPOL-0500-Get-SharePointSitesByUser.ps1` | `Scope-Users.input.csv` | SPOL | SharePoint site access per user across all access paths (SiteCollectionAdmin, SPGroupMember, M365GroupMember, TeamsGroupMember, DirectPermission) with assignment chain | Implemented |
+| D-TEAM-0500 | `D-TEAM-0500-Get-MicrosoftTeamsByUser.ps1` | `Scope-Users.input.csv` | TEAM | Microsoft Teams membership and ownership per user with role (Member/Owner) and access type (Direct/GuestInvite) | Implemented |
+| D-TEAM-0510 | `D-TEAM-0510-Get-MicrosoftTeamChannelsByUser.ps1` | `Scope-Users.input.csv` | TEAM | Teams channel access per user distinguished by channel type (Standard/Private/Shared) with access mechanism and cross-tenant detection | Implemented |
 
 ## Standard Output Columns
 
@@ -88,6 +95,16 @@ Recommended baseline columns:
 5. EXOL baseline: `D-EXOL-0010` through `D-EXOL-0280`
 6. ONDR baseline: `D-ONDR-0010` through `D-ONDR-0060`
 7. SPOL baseline: `D-SPOL-0010`
+
+### User-Centric Entitlement Reconstruction (0500 series)
+
+The 0500-sequence scripts are architecturally distinct from the baseline inventory scripts. They take `Scope-Users.input.csv` as input and reconstruct the effective access footprint for each user across workloads with path attribution. Run these when the goal is to answer *why* a user has access, not just *what* exists in the tenant.
+
+8. Entitlement baseline: `D-MEID-0500`, `D-MEID-0510`, `D-MEID-0520`, `D-EXOL-0500`, `D-SPOL-0500`, `D-TEAM-0500`, `D-TEAM-0510`
+
+> **Note:** `D-SPOL-0500` provides full path attribution for user SharePoint access and supersedes `D-SPOL-0030` for user-centric discovery use cases. `D-SPOL-0030` remains in place for resource-centric site-to-user reporting.
+>
+> **DiscoverAll behaviour:** For 0500-series scripts, `-DiscoverAll` enumerates all **licensed users** in the tenant rather than all resources of a type. For large tenants this can produce substantial output volume and elevated API call counts.
 
 ## Related Docs
 
