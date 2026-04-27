@@ -105,17 +105,18 @@ function Test-IsAssignedSecurityGroup {
         [Parameter(Mandatory)] [object]$Group
     )
 
+    $ap = $Group.AdditionalProperties
+
     $groupTypes = @()
-    if ($null -ne $Group.GroupTypes) {
-        $groupTypes = @($Group.GroupTypes)
+    if ($ap.ContainsKey('groupTypes') -and $null -ne $ap['groupTypes']) {
+        $groupTypes = @($ap['groupTypes'])
     }
 
-    $isDynamic  = $groupTypes -contains 'DynamicMembership'
-    $isUnified  = $groupTypes -contains 'Unified'
-    $isAssigned = ($Group.SecurityEnabled -eq $true -and
-                   $Group.MailEnabled    -eq $false -and
-                   -not $isDynamic -and
-                   -not $isUnified)
+    $isDynamic   = $groupTypes -contains 'DynamicMembership'
+    $isUnified   = $groupTypes -contains 'Unified'
+    $secEnabled  = $ap.ContainsKey('securityEnabled') -and $ap['securityEnabled'] -eq $true
+    $mailEnabled = $ap.ContainsKey('mailEnabled')     -and $ap['mailEnabled']     -eq $true
+    $isAssigned  = ($secEnabled -and -not $mailEnabled -and -not $isDynamic -and -not $isUnified)
     return $isAssigned
 }
 
@@ -162,7 +163,10 @@ function Get-MembershipPath {
             $parents = @($ParentGroupCache[$current.GroupId])
             foreach ($parent in $parents) {
                 $parentId   = ([string]$parent.Id).Trim()
-                $parentName = ([string]$parent.DisplayName).Trim()
+                $parentName = ''
+                if ($parent.AdditionalProperties.ContainsKey('displayName')) {
+                    $parentName = ([string]$parent.AdditionalProperties['displayName']).Trim()
+                }
                 $builtPath  = "$parentName > $($current.Path)"
 
                 if ($DirectMemberIds.Contains($parentId)) {
@@ -266,10 +270,16 @@ foreach ($row in $rows) {
             [void]$directMemberIds.Add(([string]$dm.Id).Trim())
         }
 
-        foreach ($group in @($assignedGroups | Sort-Object -Property DisplayName, Id)) {
+        foreach ($group in @($assignedGroups | Sort-Object -Property { $_.AdditionalProperties['displayName'] }, Id)) {
             $groupId          = ([string]$group.Id).Trim()
-            $groupDisplayName = ([string]$group.DisplayName).Trim()
-            $groupMailNick    = ([string]$group.MailNickname).Trim()
+            $groupDisplayName = ''
+            if ($group.AdditionalProperties.ContainsKey('displayName')) {
+                $groupDisplayName = ([string]$group.AdditionalProperties['displayName']).Trim()
+            }
+            $groupMailNick = ''
+            if ($group.AdditionalProperties.ContainsKey('mailNickname')) {
+                $groupMailNick = ([string]$group.AdditionalProperties['mailNickname']).Trim()
+            }
 
             $isDirect       = $directMemberIds.Contains($groupId)
             $membershipType = if ($isDirect) { 'Direct' } else { 'Transitive' }

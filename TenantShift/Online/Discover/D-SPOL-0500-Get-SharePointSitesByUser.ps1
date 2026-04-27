@@ -66,7 +66,7 @@ Latest from PSGallery (validated at runtime by Assert-ModuleCurrent)
     ------              ----    --------  -----------
     UserPrincipalName   String  Yes       UPN of the user whose SharePoint site access to inventory
 #>
-#Requires -Version 7.0
+#Requires -Version 5.1
 
 [CmdletBinding(DefaultParameterSetName = 'FromCsv')]
 param(
@@ -152,7 +152,7 @@ $reportPropertyOrder = @(
 
 Write-Status -Message 'Starting SharePoint Online sites by user discovery script.'
 Assert-ModuleCurrent -ModuleNames @('Microsoft.Online.SharePoint.PowerShell', 'Microsoft.Graph.Authentication', 'Microsoft.Graph.Groups', 'Microsoft.Graph.Users')
-Ensure-SharePointConnection -SharePointAdminUrl $SharePointAdminUrl
+Ensure-SharePointConnection -AdminUrl $SharePointAdminUrl
 Ensure-GraphConnection -RequiredScopes @('GroupMember.Read.All', 'Sites.Read.All')
 
 $scopeMode = 'Csv'
@@ -218,11 +218,15 @@ foreach ($row in $rows) {
 
         $accessRows = [System.Collections.Generic.List[object]]::new()
 
+        $siteIndex = 0
         foreach ($site in $allSites) {
+            $siteIndex++
             $siteUrl      = ([string]$site.Url).Trim().TrimEnd('/')
             $siteTitle    = ([string]$site.Title).Trim()
             $siteTemplate = ([string]$site.Template).Trim()
             $siteGroupId  = ([string]$site.GroupId).Trim()
+
+            Write-Status -Message "  Site $siteIndex of $($allSites.Count): '$siteTitle'."
 
             # Track which access paths have already been recorded for this site/user
             # to avoid duplicate DirectPermission rows when a user was already captured
@@ -254,7 +258,9 @@ foreach ($row in $rows) {
                 }
             }
             catch {
-                Write-Status -Message "Could not check SCA status for $upn on $siteUrl`: $($_.Exception.Message)" -Level WARN
+                if ($_.Exception.Message -notmatch 'User cannot be found') {
+                    Write-Status -Message "Could not check SCA status for $upn on $siteUrl`: $($_.Exception.Message)" -Level WARN
+                }
             }
 
             # ── Path B — SharePoint Site Group Membership ─────────────────────────
@@ -273,8 +279,10 @@ foreach ($row in $rows) {
                         })
 
                         $userInGroup = $groupMembers | Where-Object {
-                            ([string]$_.LoginName).Trim() -eq $upn -or
-                            ([string]$_.UserPrincipalName).Trim() -eq $upn
+                            $loginName = ([string]$_.LoginName).Trim()
+                            $upnProp   = $_.PSObject.Properties['UserPrincipalName']
+                            $memberUpn = if ($null -ne $upnProp) { ([string]$upnProp.Value).Trim() } else { '' }
+                            $loginName -eq $upn -or $memberUpn -eq $upn
                         }
 
                         if ($null -ne $userInGroup) {
@@ -305,7 +313,7 @@ foreach ($row in $rows) {
             }
 
             # ── Path C — M365 Group / Teams Connected Site ────────────────────────
-            if (-not [string]::IsNullOrWhiteSpace($siteGroupId)) {
+            if (-not [string]::IsNullOrWhiteSpace($siteGroupId) -and $siteGroupId -ne '00000000-0000-0000-0000-000000000000') {
                 try {
                     # Check if the user is a member of the M365 group
                     $groupMembers = @(Invoke-WithRetry -OperationName "Get M365 group members for $siteGroupId" -ScriptBlock {
@@ -429,7 +437,9 @@ foreach ($row in $rows) {
                     }
                 }
                 catch {
-                    Write-Status -Message "Could not check direct permission for $upn on $siteUrl`: $($_.Exception.Message)" -Level WARN
+                    if ($_.Exception.Message -notmatch 'User cannot be found') {
+                        Write-Status -Message "Could not check direct permission for $upn on $siteUrl`: $($_.Exception.Message)" -Level WARN
+                    }
                 }
             }
         }

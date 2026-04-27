@@ -106,14 +106,17 @@ function Test-IsDynamicSecurityGroup {
         [Parameter(Mandatory)] [object]$Group
     )
 
+    $ap = $Group.AdditionalProperties
+
     $groupTypes = @()
-    if ($null -ne $Group.GroupTypes) {
-        $groupTypes = @($Group.GroupTypes)
+    if ($ap.ContainsKey('groupTypes') -and $null -ne $ap['groupTypes']) {
+        $groupTypes = @($ap['groupTypes'])
     }
 
-    $isDynamic = $groupTypes -contains 'DynamicMembership'
-    $isUnified = $groupTypes -contains 'Unified'
-    $result    = ($Group.SecurityEnabled -eq $true -and $isDynamic -and -not $isUnified)
+    $isDynamic  = $groupTypes -contains 'DynamicMembership'
+    $isUnified  = $groupTypes -contains 'Unified'
+    $secEnabled = $ap.ContainsKey('securityEnabled') -and $ap['securityEnabled'] -eq $true
+    $result     = ($secEnabled -and $isDynamic -and -not $isUnified)
     return $result
 }
 
@@ -191,9 +194,12 @@ foreach ($row in $rows) {
             continue
         }
 
-        foreach ($group in @($dynamicGroups | Sort-Object -Property DisplayName, Id)) {
+        foreach ($group in @($dynamicGroups | Sort-Object -Property { $_.AdditionalProperties['displayName'] }, Id)) {
             $groupId          = ([string]$group.Id).Trim()
-            $groupDisplayName = ([string]$group.DisplayName).Trim()
+            $groupDisplayName = ''
+            if ($group.AdditionalProperties.ContainsKey('displayName')) {
+                $groupDisplayName = ([string]$group.AdditionalProperties['displayName']).Trim()
+            }
 
             # Fetch full group object to get MembershipRule and RuleProcessingState
             if (-not $groupDetailCache.ContainsKey($groupId)) {

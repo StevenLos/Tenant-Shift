@@ -143,6 +143,8 @@ foreach ($row in $rows) {
             throw 'UserPrincipalName is required and cannot be blank.'
         }
 
+        Write-Status -Message "Processing user $rowNumber of $($rows.Count): $upn"
+
         # Resolve user object
         $userObj = Invoke-WithRetry -OperationName "Resolve user $upn" -ScriptBlock {
             Get-MgUser -UserId $upn -Property 'Id,DisplayName,UserPrincipalName,UserType' -ErrorAction Stop
@@ -154,6 +156,7 @@ foreach ($row in $rows) {
         $joinedTeams = @(Invoke-WithRetry -OperationName "Get joined teams for $upn" -ScriptBlock {
             Get-MgUserJoinedTeam -UserId $userId -All -Property 'Id,DisplayName,Description,Visibility,IsArchived' -ErrorAction Stop
         })
+        Write-Status -Message "  Found $($joinedTeams.Count) team(s) for $upn."
 
         if ($joinedTeams.Count -eq 0) {
             $results.Add((New-InventoryResult -RowNumber $rowNumber -PrimaryKey $upn -Action 'GetMicrosoftTeamsByUser' -Status 'Success' -Message 'No Teams memberships found.' -Data ([ordered]@{
@@ -173,11 +176,16 @@ foreach ($row in $rows) {
         # Determine access type based on user type
         $accessType = if ($userType -eq 'Guest') { 'GuestInvite' } else { 'Direct' }
 
-        foreach ($team in @($joinedTeams | Sort-Object -Property DisplayName, Id)) {
+        $sortedTeams = @($joinedTeams | Sort-Object -Property DisplayName, Id)
+        $teamIndex   = 0
+        foreach ($team in $sortedTeams) {
+            $teamIndex++
             $teamId          = ([string]$team.Id).Trim()
             $teamDisplayName = ([string]$team.DisplayName).Trim()
             $teamVisibility  = ([string]$team.Visibility).Trim()
             $teamArchived    = if ($team.IsArchived -eq $true) { 'True' } else { 'False' }
+
+            Write-Status -Message "  Team $teamIndex of $($sortedTeams.Count): '$teamDisplayName'."
 
             # Teams are built on M365 groups — TeamId == LinkedM365GroupId
             $linkedM365GroupId = $teamId

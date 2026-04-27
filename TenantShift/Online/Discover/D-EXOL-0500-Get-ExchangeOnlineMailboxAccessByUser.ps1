@@ -259,7 +259,10 @@ foreach ($row in $rows) {
 
         foreach ($membership in $transitiveMemberships) {
             $gid   = ([string]$membership.Id).Trim()
-            $gname = ([string]$membership.DisplayName).Trim()
+            $gname = ''
+            if ($membership.AdditionalProperties.ContainsKey('displayName')) {
+                $gname = ([string]$membership.AdditionalProperties['displayName']).Trim()
+            }
             [void]$userGroupIds.Add($gid)
             if (-not $groupDisplayNameById.ContainsKey($gid)) {
                 $groupDisplayNameById[$gid] = $gname

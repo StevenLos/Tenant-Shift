@@ -238,6 +238,8 @@ foreach ($row in $rows) {
             throw 'UserPrincipalName is required and cannot be blank.'
         }
 
+        Write-Status -Message "Processing user $rowNumber of $($rows.Count): $upn"
+
         # Resolve user object
         $userObj = Invoke-WithRetry -OperationName "Resolve user $upn" -ScriptBlock {
             Get-MgUser -UserId $upn -Property 'Id,DisplayName,UserPrincipalName,UserType' -ErrorAction Stop
@@ -248,6 +250,7 @@ foreach ($row in $rows) {
         $joinedTeams = @(Invoke-WithRetry -OperationName "Get joined teams for $upn" -ScriptBlock {
             Get-MgUserJoinedTeam -UserId $userId -All -Property 'Id,DisplayName' -ErrorAction Stop
         })
+        Write-Status -Message "  Found $($joinedTeams.Count) team(s) for $upn."
 
         if ($joinedTeams.Count -eq 0) {
             $results.Add((New-InventoryResult -RowNumber $rowNumber -PrimaryKey $upn -Action 'GetMicrosoftTeamChannelsByUser' -Status 'Success' -Message 'No Teams channels found.' -Data ([ordered]@{
@@ -272,7 +275,10 @@ foreach ($row in $rows) {
 
         $channelsAddedForUser = 0
 
-        foreach ($team in @($joinedTeams | Sort-Object -Property DisplayName, Id)) {
+        $sortedTeams = @($joinedTeams | Sort-Object -Property DisplayName, Id)
+        $teamIndex   = 0
+        foreach ($team in $sortedTeams) {
+            $teamIndex++
             $teamId          = ([string]$team.Id).Trim()
             $teamDisplayName = ([string]$team.DisplayName).Trim()
 
@@ -303,8 +309,12 @@ foreach ($row in $rows) {
             $channels = @(Invoke-WithRetry -OperationName "Get channels for team $teamId" -ScriptBlock {
                 Get-MgTeamChannel -TeamId $teamId -All -Property 'Id,DisplayName,MembershipType,Description' -ErrorAction Stop
             })
+            Write-Status -Message "  Team $teamIndex of $($sortedTeams.Count): '$teamDisplayName' ($($channels.Count) channel(s))."
 
-            foreach ($channel in @($channels | Sort-Object -Property DisplayName, Id)) {
+            $sortedChannels = @($channels | Sort-Object -Property DisplayName, Id)
+            $channelIndex   = 0
+            foreach ($channel in $sortedChannels) {
+                $channelIndex++
                 $channelId          = ([string]$channel.Id).Trim()
                 $channelDisplayName = ([string]$channel.DisplayName).Trim()
                 $membershipTypeRaw  = ([string]$channel.MembershipType).Trim()
@@ -315,6 +325,8 @@ foreach ($row in $rows) {
                     'shared'  { 'Shared'   }
                     default   { 'Standard' }
                 }
+
+                Write-Status -Message "    Channel $channelIndex of $($sortedChannels.Count): '$channelDisplayName' [$channelType]."
 
                 if ($channelType -eq 'Standard') {
                     # Access is inherited from team membership

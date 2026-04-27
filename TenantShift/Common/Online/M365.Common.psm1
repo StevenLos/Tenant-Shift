@@ -597,20 +597,44 @@ function Import-SharePointOnlineManagementModule {
         ErrorAction = 'Stop'
     }
 
-    if ($PSVersionTable.PSEdition -eq 'Core') {
-        if ($IsWindows) {
-            $importParams['UseWindowsPowerShell'] = $true
-        }
-        else {
-            throw "Module '$moduleName' requires Windows PowerShell compatibility when used from PowerShell 7."
-        }
+    if ($PSVersionTable.PSEdition -eq 'Core' -and -not $IsWindows) {
+        throw "Module '$moduleName' requires Windows PowerShell compatibility when used from PowerShell 7 on non-Windows."
     }
 
-    try {
-        Import-Module @importParams | Out-Null
+    if ($PSVersionTable.PSEdition -eq 'Core' -and $IsWindows) {
+        # On Windows PS7, route through WinPS 5.1 for better MSAL/auth compatibility.
+        # Resolve the explicit module manifest path so WinPS 5.1 can find it even when
+        # the module is installed under a PS7-only module directory.
+        $moduleInfo = Get-Module -ListAvailable -Name $moduleName |
+                      Sort-Object Version -Descending |
+                      Select-Object -First 1
+        if ($null -ne $moduleInfo) {
+            $importParams['Name'] = $moduleInfo.Path
+        }
+        $importParams['UseWindowsPowerShell'] = $true
+
+        try {
+            Import-Module @importParams | Out-Null
+        }
+        catch {
+            # UseWindowsPowerShell failed; fall back to native PS7 import.
+            $importParams.Remove('UseWindowsPowerShell')
+            $importParams['Name'] = $moduleName
+            try {
+                Import-Module @importParams | Out-Null
+            }
+            catch {
+                throw "Failed to import required module '$moduleName'. Error: $($_.Exception.Message)"
+            }
+        }
     }
-    catch {
-        throw "Failed to import required module '$moduleName'. Error: $($_.Exception.Message)"
+    else {
+        try {
+            Import-Module @importParams | Out-Null
+        }
+        catch {
+            throw "Failed to import required module '$moduleName'. Error: $($_.Exception.Message)"
+        }
     }
 
     $missingCommands = @($requiredCommands | Where-Object { -not (Get-Command $_ -ErrorAction SilentlyContinue) })
@@ -651,7 +675,33 @@ function Ensure-SharePointConnection {
     }
 
     Write-Status -Message 'No active SharePoint Online connection detected. Connecting now.' -Level WARN
-    Connect-SPOService -Url $AdminUrl -ErrorAction Stop
+
+    $spoConnected = $false
+    try {
+        Connect-SPOService -Url $AdminUrl -ErrorAction Stop
+        $spoConnected = $true
+    }
+    catch {
+        Write-Status -Message "SPO sign-in failed ($($_.Exception.Message))." -Level WARN
+    }
+
+    if (-not $spoConnected) {
+        $spoCmd = Get-Command Connect-SPOService -ErrorAction SilentlyContinue
+        if ($spoCmd -and $spoCmd.Parameters.ContainsKey('DeviceLogin')) {
+            Write-Status -Message 'Retrying SPO sign-in with device login.' -Level WARN
+            Connect-SPOService -Url $AdminUrl -DeviceLogin -ErrorAction Stop
+            $spoConnected = $true
+        }
+    }
+
+    if (-not $spoConnected) {
+        throw (
+            'SharePoint Online sign-in failed. The WAM authentication broker is unavailable in this environment ' +
+            'and this version of the SPO module has no device-code fallback. ' +
+            "Workaround: open a Windows PowerShell 5.1 session, run 'Connect-SPOService -Url $AdminUrl', " +
+            'then re-run this script without closing that session.'
+        )
+    }
 
     if (-not (Test-SharePointConnection)) {
         throw 'SharePoint Online connection failed. Unable to verify an active session.'

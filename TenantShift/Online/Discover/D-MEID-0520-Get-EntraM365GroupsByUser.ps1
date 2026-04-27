@@ -107,11 +107,26 @@ function Test-IsM365Group {
     )
 
     $groupTypes = @()
-    if ($null -ne $Group.GroupTypes) {
-        $groupTypes = @($Group.GroupTypes)
+    $ap = $Group.AdditionalProperties
+    if ($ap.ContainsKey('groupTypes') -and $null -ne $ap['groupTypes']) {
+        $groupTypes = @($ap['groupTypes'])
     }
 
     return ($groupTypes -contains 'Unified')
+}
+
+function Get-GroupStringProperty {
+    param(
+        [Parameter(Mandatory)] [object]$Group,
+        [Parameter(Mandatory)] [string]$PropertyName,
+        [Parameter(Mandatory)] [string]$ApKey
+    )
+    if ($Group.AdditionalProperties.ContainsKey($ApKey)) {
+        return ([string]$Group.AdditionalProperties[$ApKey]).Trim()
+    }
+    $prop = $Group.PSObject.Properties[$PropertyName]
+    if ($null -ne $prop) { return ([string]$prop.Value).Trim() }
+    return ''
 }
 
 function Get-ODataType {
@@ -175,7 +190,10 @@ function Get-MembershipPath {
             $parents = @($ParentGroupCache[$current.GroupId])
             foreach ($parent in $parents) {
                 $parentId   = ([string]$parent.Id).Trim()
-                $parentName = ([string]$parent.DisplayName).Trim()
+                $parentName = ''
+                if ($parent.AdditionalProperties.ContainsKey('displayName')) {
+                    $parentName = ([string]$parent.AdditionalProperties['displayName']).Trim()
+                }
                 $builtPath  = "$parentName > $($current.Path)"
 
                 if ($DirectMemberIds.Contains($parentId)) {
@@ -330,9 +348,9 @@ foreach ($row in $rows) {
                 }
             }
 
-            $groupDisplayName = ([string]$groupObj.DisplayName).Trim()
-            $groupMailNick    = ([string]$groupObj.MailNickname).Trim()
-            $groupMail        = ([string]$groupObj.Mail).Trim()
+            $groupDisplayName = Get-GroupStringProperty -Group $groupObj -PropertyName 'DisplayName' -ApKey 'displayName'
+            $groupMailNick    = Get-GroupStringProperty -Group $groupObj -PropertyName 'MailNickname' -ApKey 'mailNickname'
+            $groupMail        = Get-GroupStringProperty -Group $groupObj -PropertyName 'Mail'         -ApKey 'mail'
 
             # Determine membership type and path
             if ($isOwner -and -not $isMember) {
